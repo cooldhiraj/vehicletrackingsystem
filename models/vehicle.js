@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Joi = require('Joi');
+const Joi = require('joi');
 
 const Vehicle = mongoose.model('Vehicle', new mongoose.Schema({
     v_type: {
