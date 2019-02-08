@@ -17,6 +17,10 @@ mongoose.connect('mongodb://vehicleuser:#Dhiraj0731@ds227255.mlab.com:27255/vehi
     .then(() => console.log('Sucessfully Connected to Database'))
     .catch(err => console.error('Error ', err));
 
+app.get('/', () => {
+    res.send('Welcome To My Application')
+});
+
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
     console.log(`listening on ${port}`);
