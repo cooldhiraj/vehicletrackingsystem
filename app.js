@@ -17,7 +17,7 @@ mongoose.connect('mongodb://vehicleuser:#Dhiraj0731@ds227255.mlab.com:27255/vehi
     .then(() => console.log('Sucessfully Connected to Database'))
     .catch(err => console.error('Error ', err));
 
-app.get('/', () => {
+app.get('/', (req, res) => {
     res.send('Welcome To My Web Application');
     console.log('Welcome To My Console Application');
 });
