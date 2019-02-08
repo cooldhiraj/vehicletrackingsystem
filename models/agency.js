@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
-const Joi = require('Joi');
+const Joi = require('joi');
 var { isEmail } = require('validator');
 
 const agencySchema =  new mongoose.Schema({
