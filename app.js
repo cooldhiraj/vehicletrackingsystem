@@ -13,7 +13,7 @@ app.use('/vehicle', vehicle);
 app.use('/driver', driver);
 app.use('/api', auth);
 
-mongoose.connect('mongodb://localhost/vehicletrackingsystem', {useNewUrlParser: true, useCreateIndex: true })
+mongoose.connect('mongodb://vehicleuser:#Dhiraj0731@ds227255.mlab.com:27255/vehicle', {useNewUrlParser: true, useCreateIndex: true })
     .then(() => console.log('Sucessfully Connected to Database'))
     .catch(err => console.error('Error ', err));
 
