@@ -18,7 +18,7 @@ mongoose.connect('mongodb://vehicleuser:#Dhiraj0731@ds227255.mlab.com:27255/vehi
     .catch(err => console.error('Error ', err));
 
 app.get('/', () => {
-    res.send('Welcome To My Application')
+    console.log('Welcome To My Application')
 });
 
 const port = process.env.PORT || 3000;
