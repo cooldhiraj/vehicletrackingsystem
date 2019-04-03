@@ -4,26 +4,33 @@ const Joi = require('joi');
 var { isEmail } = require('validator');
 
 const agencySchema =  new mongoose.Schema({
-name: {
-    type: String,
-    required: true,
-    minlength: 3,
-    maxlength: 64,
-    lowercase: true
-},
-agency_name: {
+userName: {
     type: String,
     required: true,
     minlength: 2,
     maxlength: 64,
     lowercase: true
 },
-email: {
+agencyName: {
+    type: String,
+    required: true,
+    minlength: 2,
+    maxlength: 64,
+    lowercase: true
+},
+emailId: {
     type: String,
     unique: true,
     required: true,
     lowercase: true,
     validate: [ isEmail, 'Invalid email' ]
+},
+mobileNo: {
+    type: Number,
+    required: true,
+    unique: true,
+    minlength: 10,
+    maxlength: 10,
 },
 password: {
     type: String,
@@ -31,28 +38,39 @@ password: {
     minlength: 6,
     maxlength: 128
 },
-phone: {
-    type: Number,
-    required: true,
-    unique: true,
-    minlength: 10,
-    maxlength: 10
-},
-city: {
+agencyCity: {
     type: String,
     required: true,
     minlength: 2,
     maxlength: 64,
     lowercase: true
 },
-pincode: {
-    type: Number,
+agencyPincode: {
+    type: String,
     minlength: 6,
     maxlength: 6
 },
+agencyAddress: {
+    type: String,
+    required: true,
+    minlength: 2,
+    maxlength: 256,
+    lowercase: true
+},
+agencyWebsite: {
+    type: String,
+    lowercase: true
+},
+agencyDescription: {
+    type: String,
+    required: true,
+    minlength: 6,
+    maxlength: 256,
+    lowercase: true
+},
 isAdmin: {
     type: Boolean,
-    default: false
+    default: true
 }
 });
 
@@ -67,13 +85,16 @@ const Agency = mongoose.model('Agency', agencySchema);
 
 function validator(agency){
     const schema = {
-        name: Joi.string().min(3).max(64).required(),
-        agency_name: Joi.string().min(2).max(64).required(),
-        email: Joi.string().email({ minDomainAtoms: 2 }),
+        userName: Joi.string().min(2).max(64).required(),
+        agencyName: Joi.string().min(2).max(64).required(),
+        emailId: Joi.string().email({ minDomainAtoms: 2 }),
+        mobileNo: Joi.string().min(10).max(10).required(),
         password: Joi.string().required(),
-        phone: Joi.string().min(10).max(10).required(),
-        city: Joi.string().min(2).max(64).required(),
-        pincode: Joi.string().min(6).max(6).required()   
+        agencyCity: Joi.string().min(2).max(64).required(),
+        agencyPincode: Joi.string().min(6).max(6).required(),
+        agencyAddress: Joi.string().min(2).max(256).required(),
+        agencyWebsite: Joi.string(),
+        agencyDescription: Joi.string().min(6).max(500).required()  
     }
     return Joi.validate(agency, schema)
 }
