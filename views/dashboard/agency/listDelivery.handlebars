@@ -193,9 +193,16 @@
                       <td>{{ this.tLocation }}</td>
 
                       {{#if this.isCompleted}}
-                        <td>Completed</td>
+                        <td><button class="btn btn-success">Completed</button></td>
                       {{else}}
-                        <td>Incompleted</td>
+                        <td><button class="btn btn-danger">Incompleted</button><br>
+                          <div>
+                            <form action="/delivery/mark/{{this._id}}?_method=PUT" method="POST">
+                            <input type="hidden" name="_method" value="PUT">
+                              <button class="btn btn-primary btn-link" type="submit">mark completed</button>
+                            </form>
+                          </div>
+                        </td>
                       {{/if}}
                       
                     </tr>

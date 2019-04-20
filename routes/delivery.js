@@ -75,16 +75,28 @@ router.get('/completed/:id', async (req, res) => {
 router.get('/incompleted/:id', async (req, res) => {
     const driverId = req.params.id; //getting driverId
     const result = await Delivery.find({driverId: driverId});
-
+    const driver = await Driver.findById(driverId);
     if(result.length < 1){
         return res.render('./dashboard/driver/incompletedDriver', {
-            noDelivery: true
+            noDelivery: true,
+            driver
         })
     }
     const incompleted = _.filter(result, i => i.isCompleted === false);
     return res.render('./dashboard/driver/incompletedDriver', {
-        incompletedDelivery: incompleted
+        incompletedDelivery: incompleted,
+        driver
     })
 });
+
+router.put('/mark/:id', async (req, res) => {
+    const id = req.params.id;
+    await Delivery.findOneAndUpdate(id, {
+        $set: {
+            isCompleted: true
+        }
+    });
+    return res.redirect('back');
+})
 
 module.exports = router;
